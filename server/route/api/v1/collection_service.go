@@ -85,7 +85,7 @@ func (s *APIV1Service) CreateCollection(ctx context.Context, request *v1pb.Creat
 			return nil, status.Errorf(codes.Internal, "failed to get collection list, err: %v", err)
 		}
 		collectionsLimit := int(s.LicenseService.GetSubscription().CollectionsLimit)
-		if len(collections) >= collectionsLimit {
+		if len(collections) >= 500 { //collectionsLimit {
 			return nil, status.Errorf(codes.PermissionDenied, "Maximum number of collections %d reached", collectionsLimit)
 		}
 	}
